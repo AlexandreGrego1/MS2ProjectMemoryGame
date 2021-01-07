@@ -10,7 +10,7 @@ const color_array = ["red", "blue", "yellow", "purple", "black", "grey", "pink",
 
 //arrays will hold which tiles are the propriate color
 
-let red_array = [],
+var red_array = [],
     blue_array = [],
     yellow_array = [],
     purple_array = [],
@@ -22,26 +22,26 @@ let red_array = [],
     brown_array = [];
 
 //The last tile color clicked
-let last_color = "";
+var last_color = "";
 
 //Count the amoun of clicks made by the user when clicking on tiles
-let click = 0;
+var click = 0;
 
 //Store the tile clicked on this array
-let clicked_tiles = [];
+var clicked_tiles = [];
 
 //Bool if the same tile is clicked or not
-let dupicate_click = false;
+var dupicate_click = false;
 
-//Game start variable true or false, true = game is active
-let game_start = false;
+//Gamestart variable true or false, true = game is active
+var game_start = false;
 
 //Adding event listener for tiles and buttons
 
 //The start game button eventListener (click)
 document.getElementById("start").addEventListener("click", start_game);
 
-//The start game button eventListener (click)
+//The reset game button eventListener (click)
 document.getElementById("reset").addEventListener("click", reset_game);
 
 //ID tile1 eventListener (click)
@@ -111,7 +111,7 @@ document.getElementById("tile16").addEventListener("click", function() {
 });
 
 document.getElementById("tile17").addEventListener("click", function() {
-    tiles("tile18");
+    tiles("tile17");
 });
 
 document.getElementById("tile19").addEventListener("click", function() {
@@ -166,16 +166,118 @@ function resert_var_deep(){
         brown_array = [];
 
     for (var i = o; i <20; 1++){
-        var nmbr = Math.floor(Math.random() *5);
+        var nmbr = Math.floor(Math.random() * 10);
 
-        console.log(nmbr);
+        if (nmbr == 0) {
+            if (red < 2){
+                red++;
+                red_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===1){
+            if (blue < 2){
+                blue++;
+                blue_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===2){
+            if (yellow < 2){
+                yellow++;
+                yellow_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===3){
+            if (purple < 2){
+                purple++;
+                purple_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===4){
+            if (black < 2){
+                black++;
+                black_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===5){
+            if (grey < 2){
+                grey++;
+                grey_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===6){
+            if (pink < 2){
+                pink++;
+                pink_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===7){
+            if (cyan < 2){
+                cyan++;
+                cyan_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===8){
+            if (orange < 2){
+                orange++;
+                orange_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        else if (nmbr ===9){
+            if (brown < 2){
+                brown++;
+                brown_array.push(tiles_array[i]);
+            }
+            else {
+                i--;
+            }
+        }
+        console.log(red_array);
+        console.log(blue_array);
+        console.log(yellow_array);
+        console.log(purple_array);
+        console.log(black_array);
+        console.log(grey_array);
+        console.log(orange_array);
+        console.log(pink_array);
+        console.log(cyan_array);
+        console.log(brown_array);
     }
-        
 }
+
 //Onload function, getting the game ready when the web page has loaded
 window.onload = function(){
-    this.resert_var_deep();
+    resert_var_deep();
+
+    console.log("onload is complete");
 }
+
 //Clicking play you can try again, tiles have same placement
 function start_game(){
     //This function is used to start_game and reset_game
@@ -188,6 +290,8 @@ function start_game(){
 function reset_game(){
     //This function is used to start_reset and reset_game
     reset_var_shallow();
+
+    resert_var_deep();
     
     console.log("Game has reset!");
 }
@@ -207,14 +311,14 @@ function tiles(tile){
     }
 
     //if tile clicked has bot been clicked previouslt during the game
-    if (duplicate_click){
-        click_tiles.push(tile);
-    }
+        if (!duplicate_click){
+            clicked_tiles.push(tile);
+        }
 
     //Reseting the duplicate click
-    duplicate_click = false;
+        duplicate_click = false;
 
-}
+    }
     //if game is not active
     else {
         console.log("The game has not started yet");
