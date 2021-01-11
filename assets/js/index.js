@@ -1,9 +1,10 @@
 //Test if javascript file is reached or not
-console.log("memory.js file reached");
+console.log("assets/js/index.js file reached.");
 
 //Array with tiles
 const tiles_array = ["tile1", "tile2", "tile3", "tile4", "tile5", "tile6", "tile7", "tile8", "tile9", "tile10", 
-                     "tile11", "tile12", "tile13", "tile14", "tile15", "tile16", "tile17", "tile18", "tile20", "tile20"];
+                     "tile11", "tile12", "tile13", "tile14", "tile15", "tile16", "tile17", "tile18", "tile20", 
+                     "tile20"];
 
 //The colors used
 const color_array = ["red", "blue", "yellow", "purple", "black", "grey", "pink", "cyan", "orange", "brown"];
@@ -31,7 +32,7 @@ var click = 0;
 var clicked_tiles = [];
 
 //Bool if the same tile is clicked or not
-var dupicate_click = false;
+var duplicate_click = false;
 
 //Gamestart variable true or false, true = game is active
 var game_start = false;
@@ -127,7 +128,7 @@ function reset_var_shallow(){
     //Reseting the last color clicked, amount of clicks, clicked tiles, duplicate tiles variable
     last_color = "",
         click = 0,
-        clickled_tiles = [],
+        clicked_tiles = [],
         dupicate_click = false;
 
     //start game, if variable is true them you can play the game
@@ -140,7 +141,7 @@ function reset_var_shallow(){
 }
 
 //Resetting variables associated with the randomization of tiles placement. This is a deep reset
-function resert_var_deep(){
+function reset_var_deep(){
     //Used in the for loop checking how many of each color is chosen
     var red = 0,
         blue = 0,
@@ -165,7 +166,7 @@ function resert_var_deep(){
         orange_array = [],
         brown_array = [];
 
-    for (var i = o; i <20; 1++){
+    for (var i = 0; i < 20; i++){
         var nmbr = Math.floor(Math.random() * 10);
 
         if (nmbr == 0) {
@@ -177,7 +178,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===1){
+        else if (nmbr === 1){
             if (blue < 2){
                 blue++;
                 blue_array.push(tiles_array[i]);
@@ -186,7 +187,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===2){
+        else if (nmbr === 2){
             if (yellow < 2){
                 yellow++;
                 yellow_array.push(tiles_array[i]);
@@ -195,7 +196,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===3){
+        else if (nmbr === 3){
             if (purple < 2){
                 purple++;
                 purple_array.push(tiles_array[i]);
@@ -204,7 +205,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===4){
+        else if (nmbr === 4){
             if (black < 2){
                 black++;
                 black_array.push(tiles_array[i]);
@@ -213,7 +214,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===5){
+        else if (nmbr === 5){
             if (grey < 2){
                 grey++;
                 grey_array.push(tiles_array[i]);
@@ -222,7 +223,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===6){
+        else if (nmbr === 6){
             if (pink < 2){
                 pink++;
                 pink_array.push(tiles_array[i]);
@@ -231,7 +232,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===7){
+        else if (nmbr === 7){
             if (cyan < 2){
                 cyan++;
                 cyan_array.push(tiles_array[i]);
@@ -240,7 +241,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===8){
+        else if (nmbr === 8){
             if (orange < 2){
                 orange++;
                 orange_array.push(tiles_array[i]);
@@ -249,7 +250,7 @@ function resert_var_deep(){
                 i--;
             }
         }
-        else if (nmbr ===9){
+        else if (nmbr === 9){
             if (brown < 2){
                 brown++;
                 brown_array.push(tiles_array[i]);
@@ -258,24 +259,14 @@ function resert_var_deep(){
                 i--;
             }
         }
-        console.log(red_array);
-        console.log(blue_array);
-        console.log(yellow_array);
-        console.log(purple_array);
-        console.log(black_array);
-        console.log(grey_array);
-        console.log(orange_array);
-        console.log(pink_array);
-        console.log(cyan_array);
-        console.log(brown_array);
     }
 }
 
 //Onload function, getting the game ready when the web page has loaded
 window.onload = function(){
-    resert_var_deep();
+    reset_var_deep();
 
-    console.log("onload is complete");
+    console.log("onload function is complete");
 }
 
 //Clicking play you can try again, tiles have same placement
@@ -291,7 +282,7 @@ function reset_game(){
     //This function is used to start_reset and reset_game
     reset_var_shallow();
 
-    resert_var_deep();
+    reset_var_deep();
     
     console.log("Game has reset!");
 }
@@ -303,7 +294,7 @@ function tiles(tile){
         console.log("The game has started");
 
         //Checking the array if the tile clicked has been clicked previously
-        for (var i = 0; i <clicked_tiles.length; i++){
+        for (var i = 0; i < clicked_tiles.length; i++){
             if (tile == clicked_tiles[i]){
                 dupicate_click = true;
                 console.log("Duplicate tile clicked");
@@ -313,11 +304,232 @@ function tiles(tile){
     //if tile clicked has bot been clicked previouslt during the game
         if (!duplicate_click){
             clicked_tiles.push(tile);
+
+            // if the tile clicked is red
+            if (tile == red_array[0] || tile == red_array [1]) {
+                //checking if a tile was previously clicked
+                if (last_color.lengh > 2){
+                    //if the previous color is matching (red)
+                    if (last_color == "red") {
+                        document.getElementById(tile).style.backgroundColor = color_array[0];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[0];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[0];
+                    last_color = "red";
+                }
+            }
+
+            // if the tile clicked is blue
+            else if (tile == blue_array[0] || tile == blue_array [1]) {
+                //checking if a tile was previously clicked
+                if (last_color.lengh > 2){
+                    //if the previous color is matching (blue)
+                    if (last_color == "blue") {
+                        document.getElementById(tile).style.backgroundColor = color_array[1];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[1];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[1];
+                    last_color = "blue";
+                }
+            }
+
+            // if the tile clicked is yellow
+            else if (tile == yellow_array[0] || tile == yellow_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (yellow)
+                    if (last_color == "yellow") {
+                        document.getElementById(tile).style.backgroundColor = color_array[2];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[2];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[2];
+                    last_color = "yellow";
+                }
+            }
+
+            // if the tile clicked is purple
+            else if (tile == purple_array[0] || tile == purple_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (purple)
+                    if (last_color == "purple") {
+                        document.getElementById(tile).style.backgroundColor = color_array[3];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[3];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[3];
+                    last_color = "purple";
+                }
+            }
+
+            // if the tile clicked is black
+            else if (tile == black_array[0] || tile == black_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (black)
+                    if (last_color == "black") {
+                        document.getElementById(tile).style.backgroundColor = color_array[4];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[4];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[4];
+                    last_color = "black";
+                }
+            }
+
+            // if the tile clicked is black
+            else if (tile == grey_array[0] || tile == grey_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (grey)
+                    if (last_color == "grey") {
+                        document.getElementById(tile).style.backgroundColor = color_array[5];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[5];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[5];
+                    last_color = "grey";
+                }
+            }
+
+            // if the tile clicked is orange
+            else if (tile == orange_array[0] || tile == orange_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (orange)
+                    if (last_color == "orange") {
+                        document.getElementById(tile).style.backgroundColor = color_array[6];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[6];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[6];
+                    last_color = "orange";
+                }
+            }
+
+            // if the tile clicked is pink
+            else if (tile == pink_array[0] || tile == pink_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (red)
+                    if (last_color == "pink") {
+                        document.getElementById(tile).style.backgroundColor = color_array[7];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[7];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[7];
+                    last_color = "pink";
+                }
+            }
+
+            // if the tile clicked is cyan
+            else if (tile == cyan_array[0] || tile == cyan_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (cyan)
+                    if (last_color == "cyan") {
+                        document.getElementById(tile).style.backgroundColor = color_array[8];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[8];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[8];
+                    last_color = "cyan";
+                }
+            }
+
+            // if the tile clicked is brown
+            else if (tile == brown_array[0] || tile == brown_array [1]) {
+                                if (last_color.lengh > 2){
+                    //if the previous color is matching (brown)
+                    if (last_color == "brown") {
+                        document.getElementById(tile).style.backgroundColor = color_array[1];
+                        last_color = "";
+                    }
+                    else {
+                        document.getElementById(tile).style.backgroundColor = color_array[1];
+                        game_start = false;
+                        setTimeout(function() {
+                            start_game();
+                        }, 2000);
+                    }
+                }
+                else {
+                    document.getElementById(tile).style.backgroundColor = color_array[1];
+                    last_color = "brown";
+                }
+            }
         }
 
     //Reseting the duplicate click
         duplicate_click = false;
-
     }
     //if game is not active
     else {
